@@ -1,5 +1,36 @@
-@()
+@main("Welcome to Chess") {
+<h1>Welcome to Chess!</h1>
 
-@main("Welcome to Play") {
-  <h1>Welcome to Chess!</h1>
+<p>There are following endpoints to interact with the game:</p>
+<table>
+    <thead>
+    <tr>
+        <th>URL</th>
+        <th>Description</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>GET /undo</td>
+        <td>Undo Move</td>
+    </tr>
+    <tr>
+        <td>GET /redo</td>
+        <td>Redo Move</td>
+    </tr>
+    <tr>
+        <td>POST /move?pos_now=B2&pos_new=B4</td>
+        <td>Make Move</td>
+    </tr>
+    </tbody>
+</table>
+
+<hr>
+
+<h2>Quick Links</h2>
+<ul>
+    <li><a href="/rules">Read the basic chess rules</a></li>
+    <li><a href="/chess">Start a new chess game</a></li>
+    <li><a href="https://github.com/julienco03/Chess_WebApp">Visit our GitHub repository</a></li>
+</ul>
 }
