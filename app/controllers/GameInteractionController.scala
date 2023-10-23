@@ -2,17 +2,20 @@ package controllers
 
 import de.htwg.se.Chess.controller.controllerComponent.Controller
 import de.htwg.se.Chess.model.Board
-import play.api.mvc._
-import javax.inject._
+import play.api.mvc.*
+import javax.inject.*
 
 @Singleton
 class GameInteractionController @Inject()(override val controllerComponents: ControllerComponents) extends AbstractController(controllerComponents) {
 
   val controller: Controller = Controller(field = Board(), fileIO = null)
   def chessBoardAsText: String = controller.board_to_string_c()
+  def chessBoardFields: Array[Array[String]] = controller.field.board.values.grouped(8).toArray.map(row => row.toArray)
+  def playerTurn: String = "TODO"
+
 
   def chess: Action[AnyContent] = Action {
-    Ok(views.html.chess(chessBoardAsText))
+    Ok(views.html.chess(playerTurn, chessBoardFields))
   }
 
   def undoMove: Action[AnyContent] = Action {
