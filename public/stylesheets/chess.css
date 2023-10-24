@@ -2,6 +2,8 @@
     --body-background-color: #FFF2D8;
     --cell-size: 80px;
     --line-gap: 3px;
+    --vertical-offset: 20px;
+    --horizontal-offset: 10px;
 }
 
 *,
@@ -68,8 +70,8 @@ body {
 /* Beschriftung der horizontalen Achse */
 #xlabel {
     text-align: center;
-    margin-left: 20px;
-    margin-bottom: 10px;
+    margin-left: var(--vertical-offset);
+    margin-bottom: var(--horizontal-offset);
 }
 #xlabel > * {
     display: inline-block;
@@ -79,8 +81,8 @@ body {
 /* Beschriftung der horizontalen Achse */
 #ylabel {
     text-align: center;
-    margin-top: 13px;
-    margin-right: 20px;
+    margin-top: calc(var(--horizontal-offset) + var(--line-gap));
+    margin-right: var(--vertical-offset);
 }
 #ylabel > * {
     display: block;
