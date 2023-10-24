@@ -44,6 +44,7 @@ body {
     height: var(--cell-size);
     font-size: 1.5rem;
     display: inline-block;
+    vertical-align: middle;
 }
 
 /* Schachbrettmuster */
@@ -85,5 +86,4 @@ body {
     display: block;
     height: calc(var(--cell-size) + var(--line-gap));
     line-height: 60px;
-    vertical-align: middle;
 }
