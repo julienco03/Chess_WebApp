@@ -1,0 +1,98 @@
+:root {
+    --body-background-color: #FFF2D8;
+    --light-square-color: #FFFFFF;
+    --dark-square-color: #739072;
+    --cell-size: 80px;
+    --line-gap: 0px;
+    --vertical-offset: 20px;
+    --horizontal-offset: 10px;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+}
+
+body {
+    font-family: "Lato", "Helvetica", "sans-serif";
+    background-color: var(--body-background-color);
+}
+
+button {
+	border: none;
+	cursor: pointer;
+}
+
+#spielermeldung {
+    margin-top: 5em;
+    margin-bottom: 2em;
+    text-align: center;
+}
+
+#chessboard-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+
+.line {
+    padding: 0;
+    height: var(--cell-size);
+    margin-bottom: var(--line-gap);
+}
+
+.square {
+    padding: 0;
+    margin: -2px;
+    width: var(--cell-size);
+    height: var(--cell-size);
+    font-size: 1.5rem;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Schachbrettmuster */
+.line:nth-child(even) > .square:nth-child(even) {
+    background-color: var(--light-square-color);
+    color: var(--dark-square-color);
+}
+.line:nth-child(even) > .square:nth-child(odd) {
+    background-color: var(--dark-square-color);
+    color: var(--light-square-color);
+}
+.line:nth-child(odd) > .square:nth-child(even) {
+    background-color: var(--dark-square-color);
+    color: var(--light-square-color);
+}
+.line:nth-child(odd) > .square:nth-child(odd) {
+    background-color: var(--light-square-color);
+    color: var(--dark-square-color);
+}
+
+/* Beschriftung der horizontalen Achse */
+#xlabel {
+    text-align: center;
+    margin-left: var(--vertical-offset);
+    margin-bottom: var(--horizontal-offset);
+}
+#xlabel > * {
+    display: inline-block;
+    width: var(--cell-size);
+}
+
+/* Beschriftung der horizontalen Achse */
+#ylabel {
+    text-align: center;
+    margin-top: calc(var(--horizontal-offset) + var(--line-gap));
+    margin-right: var(--vertical-offset);
+}
+#ylabel > * {
+    display: block;
+    height: calc(var(--cell-size) + var(--line-gap));
+    line-height: 60px;
+}
