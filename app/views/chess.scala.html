@@ -1,7 +1,8 @@
 @(playerTurn: String, chessBoardFields: Array[Array[String]])
-<link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/chess.css")">
 
 @main("Play Chess") {
+<link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/chess.css")">
+
 <pre id="spielermeldung">Spieler 1 ist an der Reihe...</pre>
 
 <div id="xlabel">
@@ -37,4 +38,6 @@
         }
     </div>
 </div>
+
+<script rel="text/javascript" src="@routes.Assets.versioned("javascripts/chess.js")"></script>
 }

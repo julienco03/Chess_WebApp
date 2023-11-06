@@ -1,5 +1,7 @@
 :root {
     --body-background-color: #FFF2D8;
+    --light-square-color: #FFFFFF;
+    --dark-square-color: #739072;
     --cell-size: 80px;
     --line-gap: 0px;
     --vertical-offset: 20px;
@@ -56,20 +58,20 @@ button {
 
 /* Schachbrettmuster */
 .line:nth-child(even) > .square:nth-child(even) {
-    background-color: #fff;
-    color: #000;
+    background-color: var(--light-square-color);
+    color: var(--dark-square-color);
 }
 .line:nth-child(even) > .square:nth-child(odd) {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--dark-square-color);
+    color: var(--light-square-color);
 }
 .line:nth-child(odd) > .square:nth-child(even) {
-    background-color: #000;
-    color: #fff;
+    background-color: var(--dark-square-color);
+    color: var(--light-square-color);
 }
 .line:nth-child(odd) > .square:nth-child(odd) {
-    background-color: #fff;
-    color: #000;
+    background-color: var(--light-square-color);
+    color: var(--dark-square-color);
 }
 
 /* Beschriftung der horizontalen Achse */
