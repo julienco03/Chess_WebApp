@@ -3,7 +3,18 @@
 # https://www.playframework.com/documentation/latest/ScalaRouting
 # ~~~~
 
-# An example controller showing a sample home page
-GET     /                           controllers.HomeController.index()
+# Basic routes
+GET     /                           controllers.BasicController.index()
+GET     /rules                      controllers.BasicController.rules()
+
+# Game interaction routes
+GET     /chess                      controllers.GameInteractionController.chess()
+GET     /chess/undo                 controllers.GameInteractionController.undoMove()
+GET     /chess/redo                 controllers.GameInteractionController.redoMove()
+POST    /chess/move                 controllers.GameInteractionController.makeMove()
+
+# Favicon
+GET     /favicon.ico                controllers.Assets.at(path="/public/images", file="favicon2.svg")
 
 # Map static resources from the /public folder to the /assets URL path
+GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
