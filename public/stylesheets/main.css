@@ -15,9 +15,9 @@ button {
   cursor: pointer;
 }
 #spielermeldung {
-  margin-top: 5em;
-  margin-bottom: 2em;
+  margin: 2.5em 0 1.5em 0;
   text-align: center;
+  font-size: 1.5rem;
 }
 #chessboard-wrapper {
   display: flex;

@@ -1,36 +1,19 @@
 @main("Welcome to Chess") {
-<h1>Welcome to Chess!</h1>
+<div class="container mt-5">
 
-<p>There are following endpoints to interact with the game:</p>
-<table>
-    <thead>
-    <tr>
-        <th>URL</th>
-        <th>Description</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td>GET /undo</td>
-        <td>Undo Move</td>
-    </tr>
-    <tr>
-        <td>GET /redo</td>
-        <td>Redo Move</td>
-    </tr>
-    <tr>
-        <td>POST /move?pos_now=B2&pos_new=B4</td>
-        <td>Make Move</td>
-    </tr>
-    </tbody>
-</table>
-
-<hr>
-
-<h2>Quick Links</h2>
-<ul>
-    <li><a href="/rules">Read the basic chess rules</a></li>
-    <li><a href="/chess">Start a new chess game</a></li>
-    <li><a href="https://github.com/julienco03/Chess_WebApp">Visit our GitHub repository</a></li>
+<h1 class="text-center">Welcome to Chess!</h1>
+<h2 class="mt-5">Quick Links</h2>
+<ul class="list-group mt-3">
+    <li class="list-group-item">
+        <a href="/rules">Read the basic chess rules</a>
+    </li>
+    <li class="list-group-item">
+        <a href="/chess">Start a new chess game</a>
+    </li>
+    <li class="list-group-item">
+        <a href="https://github.com/julienco03/Chess_WebApp" target="_blank">Visit our GitHub repository</a>
+    </li>
 </ul>
+
+</div>
 }
