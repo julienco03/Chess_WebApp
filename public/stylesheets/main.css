@@ -73,3 +73,9 @@ button {
   height: calc(80px);
   line-height: 60px;
 }
+
+#navbar {
+    width: fit-content;
+    display: block;
+    margin: 0 auto;
+}
