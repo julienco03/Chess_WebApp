@@ -29,10 +29,51 @@ document.addEventListener("DOMContentLoaded", function() {
             if (buttonText == "") {
                 button.textContent = "";
             } else {
-                button.innerHTML = '<img src=' + imagePath + ' width="69" height="69" />';
+                button.innerHTML = '<img class="chess-piece-image" src=' + imagePath + '/>';
             }
         });
     }
 
     replaceButtonTextWithImages();
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    let draggedPiece = null;
+
+    // Funktion, um das Ziehen zu starten
+    function startDrag(e) {
+        draggedPiece = e.target;
+        e.dataTransfer.setData("text/plain", "");
+    }
+
+    // Funktion, um das Ziehen zu beenden
+    function endDrag() {
+        draggedPiece = null;
+    }
+
+    // Funktion, um das Ziehen zu verarbeiten
+    function handleDragOver(e) {
+        e.preventDefault();
+    }
+
+    // Funktion, um die Position zu aktualisieren
+    function handleDrop(e) {
+        e.preventDefault();
+        if (draggedPiece) {
+            const targetSquare = e.target;
+            // Hier füge deine Logik hinzu, um die Position der Schachfigur zu aktualisieren.
+            // Du kannst z. B. die Informationen aus den Datenattributen der Schachfelder verwenden.
+            console.log("Moved from", draggedPiece, "to", targetSquare);
+        }
+    }
+
+    // Füge Drag-and-Drop-Handler zu den Schachfeldern hinzu
+    const squares = document.querySelectorAll(".square");
+    squares.forEach((square) => {
+        square.addEventListener("dragstart", startDrag);
+        square.addEventListener("dragend", endDrag);
+        square.addEventListener("dragover", handleDragOver);
+        square.addEventListener("drop", handleDrop);
+        square.setAttribute("draggable", true);
+    });
 });

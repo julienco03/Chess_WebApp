@@ -10,14 +10,14 @@ import javax.inject.*
 class GameInteractionController @Inject()(override val controllerComponents: ControllerComponents) extends AbstractController(controllerComponents) {
 
   var controller: Controller = Controller(field = Board(), fileIO = null)
-  var playerTurn: String = "Spieler 1"
-  val playerNames: Array[String] = Array()  // TODO: Implement player names
+  val playerNames: Array[String] = Array("Stefan", "Julian")  // TODO: Implement player names
+  var playerTurn: String = playerNames(0)
   def chessBoardAsText: String = controller.board_to_string_c()
   def chessBoardFields: Array[Array[String]] = controller.field.board.values.grouped(8).toArray.map(row => row.toArray)
 
 
   def chess: Action[AnyContent] = Action {
-    Ok(views.html.chess(playerTurn, chessBoardFields))
+    Ok(views.html.chess(playerNames, playerTurn, chessBoardFields))
   }
 
   def newGame: Action[AnyContent] = Action {
@@ -50,7 +50,7 @@ class GameInteractionController @Inject()(override val controllerComponents: Con
   }
 
   def changePlayer(): Unit = {
-    if (playerTurn == "Spieler 1") playerTurn = "Spieler 2"
-    else if (playerTurn == "Spieler 2") playerTurn = "Spieler 1"
+    if (playerTurn == playerNames(0)) playerTurn = playerNames(1)
+    else if (playerTurn == playerNames(1)) playerTurn = playerNames(0)
   }
 }
