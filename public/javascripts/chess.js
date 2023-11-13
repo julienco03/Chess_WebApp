@@ -17,16 +17,15 @@ const pieceMappings = {
 };
 
 document.addEventListener("DOMContentLoaded", function() {
-    // Eine Funktion, um die Buttons zu ersetzen
+    // Eine Funktion, um die Schachfiguren als Text durch Bilder zu ersetzen
     function replaceButtonTextWithImages() {
         const buttons = document.querySelectorAll(".square");
         buttons.forEach(button => {
-            // Den Text innerhalb des Buttons abrufen
+            // Text innerhalb des Buttons holen
             const buttonText = button.textContent.trim();
-            // Den Bildpfad basierend auf dem Text erstellen
+            // Bildpfad basierend auf dem Text erstellen
             const imagePath = 'assets/images/' + pieceMappings[buttonText];
-            console.log(imagePath)
-            // Den Text innerhalb des Buttons leeren
+            // Falls Spielfeld leer -> kein Bild, ansonsten Text durch img-Element ersetzen
             if (buttonText == "") {
                 button.textContent = "";
             } else {
@@ -35,6 +34,5 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // Die Funktion aufrufen, um die Buttons zu ersetzen
     replaceButtonTextWithImages();
 });

@@ -1,0 +1,107 @@
+@body-background-color: #FFF2D8;
+@light-square-color: #FFFFFF;
+@dark-square-color: #739072;
+@cell-size: 80px;
+@line-gap: 0px;
+@horizontal-offset: 10px;
+@vertical-offset: 20px;
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html {
+	font-size: 16px;
+}
+
+body {
+	font-family: "Lato", "Helvetica", "sans-serif";
+	background-color: @body-background-color;
+}
+
+button {
+	border: none;
+	cursor: pointer;
+}
+
+#spielermeldung {
+	margin-top: 5em;
+	margin-bottom: 2em;
+	text-align: center;
+}
+
+#chessboard-wrapper {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+/* Schachbrettmuster */
+.line {
+	padding: 0;
+	height: @cell-size;;
+	margin-bottom: @line-gap;
+
+	&:nth-child(even) {
+		>.square {
+			&:nth-child(even) {
+				background-color: @light-square-color;
+				color: @dark-square-color;
+			}
+			&:nth-child(odd) {
+				background-color: @dark-square-color;
+				color: @light-square-color;
+			}
+		}
+	}
+
+	&:nth-child(odd) {
+		>.square {
+			&:nth-child(even) {
+				background-color: @dark-square-color;
+				color: @light-square-color;
+			}
+			&:nth-child(odd) {
+				background-color: @light-square-color;
+				color: @dark-square-color;
+			}
+		}
+	}
+}
+
+.square {
+	padding: 0;
+	margin: -2px;
+	width: @cell-size;
+	height: @cell-size;
+	font-size: 1.5rem;
+	display: inline-block;
+	vertical-align: middle;
+}
+
+/* Beschriftung der horizontalen Achse */
+#xlabel {
+	text-align: center;
+	margin-left: @vertical-offset;
+	margin-bottom: @horizontal-offset;
+
+	>* {
+		display: inline-block;
+		width: @cell-size;
+	}
+}
+
+/* Beschriftung der horizontalen Achse */
+#ylabel {
+	text-align: center;
+	margin-top: calc(@horizontal-offset + @line-gap);
+	margin-right: @vertical-offset;
+
+	>* {
+		display: block;
+		height: calc(@cell-size + @line-gap);
+		line-height: 60px;
+	}
+}
