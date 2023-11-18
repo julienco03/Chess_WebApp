@@ -38,19 +38,61 @@ button {
   width: fit-content;
   display: block;
   margin: 0 auto;
+  z-index: 997;
 }
 
-/* Alert-Box */
-#alert-box {
-    max-width: min(450px, 70%);
+/* Pop-Up */
+#popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    padding: 20px;
+    border: 2px solid #ccc;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
 }
 
-#alert-box > p {
-    font-size: 1.5rem;
+#popup > input {
+    margin-bottom: 10px;
 }
 
-@media (max-width: 600px) and (orientation: portrait) {
-    font-size: 1rem;
+#popup-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+}
+
+/* Spielerprofile */
+.playerProfile {
+    text-align: left;
+    width: 550px;
+    height: 50px;
+}
+
+.playerProfile img {
+    width: 50px;
+}
+
+.playerProfile.nextTurn {
+   box-shadow: 0px 0px 5px #999;
+}
+
+@media (max-width: 650px) and (orientation: portrait) {
+    .playerProfile {
+        width: 60vw;
+        height: 30px;
+    }
+    .playerProfile img {
+        width: 30px;
+    }
 }
 
 /* Schachbrett */
@@ -82,7 +124,7 @@ button {
 }
 
 /* Schachbrett auf mobilen Geräten */
-@media (max-width: 600px) and (orientation: portrait) {
+@media (max-width: 650px) and (orientation: portrait) {
     .line {
         height: var(--cell-size-mobile);
     }
@@ -132,7 +174,7 @@ button {
     padding-right: 0;
 }
 
-@media (max-width: 600px) and (orientation: portrait) {
+@media (max-width: 650px) and (orientation: portrait) {
     #xlabel {
         margin-left: var(--vertical-offset-mobile);
         margin-bottom: var(--horizontal-offset-mobile);
@@ -154,7 +196,7 @@ button {
     line-height: 70px;
 }
 
-@media (max-width: 600px) and (orientation: portrait) {
+@media (max-width: 650px) and (orientation: portrait) {
     #ylabel {
         margin-right: var(--vertical-offset-mobile);
     }

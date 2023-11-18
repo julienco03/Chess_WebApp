@@ -10,32 +10,25 @@ import javax.inject.*
 class GameInteractionController @Inject()(override val controllerComponents: ControllerComponents) extends AbstractController(controllerComponents) {
 
   var controller: Controller = Controller(field = Board(), fileIO = null)
-  val playerNames: Array[String] = Array("Stefan", "Julian")  // TODO: Implement player names
-  var playerTurn: String = playerNames(0)
-  def chessBoardAsText: String = controller.board_to_string_c()
   def chessBoardFields: Array[Array[String]] = controller.field.board.values.grouped(8).toArray.map(row => row.toArray)
 
-
   def chess: Action[AnyContent] = Action {
-    Ok(views.html.chess(playerNames, playerTurn, chessBoardFields))
+    Ok(views.html.chess(chessBoardFields))
   }
 
   def newGame: Action[AnyContent] = Action {
     controller = Controller(field = Board(), fileIO = null)
-    playerTurn = playerNames(0)
-    Redirect("/chess")
+    Redirect(routes.GameInteractionController.chess())
   }
 
   def undoMove: Action[AnyContent] = Action {
     controller.undo()
-    changePlayer()
-    Redirect("/chess")
+    Redirect(routes.GameInteractionController.chess())
   }
 
   def redoMove: Action[AnyContent] = Action {
     controller.redo()
-    changePlayer()
-    Redirect("/chess")
+    Redirect(routes.GameInteractionController.chess())
   }
 
   def makeMove: Action[AnyContent] = Action {
@@ -45,12 +38,6 @@ class GameInteractionController @Inject()(override val controllerComponents: Con
       val new_pos = queryParams("new")
       controller.domove()
       controller.move_c(old_pos, new_pos)
-      changePlayer()
-      Redirect("/chess")
-  }
-
-  def changePlayer(): Unit = {
-    if (playerTurn == playerNames(0)) playerTurn = playerNames(1)
-    else if (playerTurn == playerNames(1)) playerTurn = playerNames(0)
+      Redirect(routes.GameInteractionController.chess())
   }
 }
