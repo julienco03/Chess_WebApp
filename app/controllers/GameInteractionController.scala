@@ -22,7 +22,7 @@ class GameInteractionController @Inject()(override val controllerComponents: Con
 
   def newGame: Action[AnyContent] = Action {
     controller = Controller(field = Board(), fileIO = null)
-    playerTurn = "Spieler 1"
+    playerTurn = playerNames(0)
     Redirect("/chess")
   }
 
