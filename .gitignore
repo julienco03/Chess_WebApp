@@ -10,3 +10,5 @@ target
 /RUNNING_PID
 .metals
 .metals/*
+Chess.iml
+MANIFEST.MF

@@ -1,42 +1,73 @@
-@(playerTurn: String, chessBoardFields: Array[Array[String]])
+@(playerNames: Array[String], playerTurn: String, chessBoardFields: Array[Array[String]])
 
 @main("Play Chess") {
-<link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/main.css")">
+<link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/chess.css")">
 
-<pre id="spielermeldung">Spieler 1 ist an der Reihe...</pre>
+<nav id="navbar" class="px-3 sticky-top navbar navbar-light bg-light navbar-expand-sm">
+    <ul class="navbar-nav">
+        <li class="nav-item px-3">
+            <a class="nav-link" href="/chess/new">
+                <img src="@routes.Assets.versioned("images/new.png")" alt="New Game Icon">
+                New Game
+            </a>
+        </li>
+        <li class="nav-item px-3">
+            <a class="nav-link" href="/chess/undo">
+                <img src="@routes.Assets.versioned("images/undo.png")" alt="Undo Icon" style="margin-bottom: 3px;">
+                Undo
+            </a>
+        </li>
+        <li class="nav-item px-3">
+            <a class="nav-link" href="/chess/redo">
+                <img src="@routes.Assets.versioned("images/redo.png")" alt="Redo Icon" style="margin-bottom: 3px;">
+                Redo
+            </a>
+        </li>
+    </ul>
+</nav>
 
-<div id="xlabel">
-    <div>A</div>
-    <div>B</div>
-    <div>C</div>
-    <div>D</div>
-    <div>E</div>
-    <div>F</div>
-    <div>G</div>
-    <div>H</div>
-</div>
+<div class="container-fluid mt-5 mb-2 text-center">
 
-<div id="chessboard-wrapper">
-    <div id="ylabel">
-        <div>8</div>
-        <div>7</div>
-        <div>6</div>
-        <div>5</div>
-        <div>4</div>
-        <div>3</div>
-        <div>2</div>
-        <div>1</div>
+    <div id="alert-box" class="alert alert-success mx-auto">
+        <p class="mb-0">@playerTurn ist an der Reihe...</p>
     </div>
-    <div id="chessboard">
-        @for(line <- chessBoardFields) {
-        <div class="line">
-            @for(square <- line) {
-            <button class="square">@square</button>
-            }
-            <br>
+
+    <div>
+        <div id="xlabel">
+            <div>A</div>
+            <div>B</div>
+            <div>C</div>
+            <div>D</div>
+            <div>E</div>
+            <div>F</div>
+            <div>G</div>
+            <div>H</div>
         </div>
-        }
+
+        <div id="chessboard-wrapper">
+            <div id="ylabel">
+                <div>1</div>
+                <div>2</div>
+                <div>3</div>
+                <div>4</div>
+                <div>5</div>
+                <div>6</div>
+                <div>7</div>
+                <div>8</div>
+            </div>
+            <div id="chessboard">
+                @for(line <- chessBoardFields) {
+                <div class="line">
+                    @for(square <- line) {
+                    <button class="square">@square</button>
+                    }
+                    <br>
+                </div>
+                }
+            </div>
+        </div>
     </div>
+
 </div>
 
 <script rel="text/javascript" src="@routes.Assets.versioned("javascripts/chess.js")"></script>

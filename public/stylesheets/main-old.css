@@ -15,9 +15,9 @@ button {
   cursor: pointer;
 }
 #spielermeldung {
-  margin-top: 5em;
-  margin-bottom: 2em;
-  text-align: center;
+  display: inline-block;
+  width: 60%;
+  height: 3.5em;
 }
 #chessboard-wrapper {
   display: flex;
@@ -61,15 +61,21 @@ button {
 }
 #xlabel >* {
   display: inline-block;
-  width: 80px;
+  width: 77px;
 }
 #ylabel {
   text-align: center;
-  margin-top: calc(10px);
+  margin-top: 10px;
   margin-right: 20px;
 }
 #ylabel >* {
   display: block;
-  height: calc(80px);
+  height: 80px;
   line-height: 60px;
+}
+
+#navbar {
+  width: fit-content;
+  display: block;
+  margin: 0 auto;
 }

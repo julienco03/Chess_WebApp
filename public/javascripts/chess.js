@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", function() {
             if (buttonText == "") {
                 button.textContent = "";
             } else {
-                button.innerHTML = '<img src=' + imagePath + ' width="69" height="69" />';
+                button.innerHTML = '<img class="chess-piece-image" src=' + imagePath + '/>';
             }
         });
     }
