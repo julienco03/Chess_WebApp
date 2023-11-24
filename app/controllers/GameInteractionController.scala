@@ -23,17 +23,20 @@ class GameInteractionController @Inject()(override val controllerComponents: Con
 
   def newGame: Action[AnyContent] = Action {
     controller = Controller(field = Board(), fileIO = null)
-    Redirect(routes.GameInteractionController.chess())
+    val updatedBoardJson = vectorMapToJson(controller.field)
+    Ok(updatedBoardJson).as("application/json")
   }
 
   def undoMove: Action[AnyContent] = Action {
     controller.undo()
-    Redirect(routes.GameInteractionController.chess())
+    val updatedBoardJson = vectorMapToJson(controller.field)
+    Ok(updatedBoardJson).as("application/json")
   }
 
   def redoMove: Action[AnyContent] = Action {
     controller.redo()
-    Redirect(routes.GameInteractionController.chess())
+    val updatedBoardJson = vectorMapToJson(controller.field)
+    Ok(updatedBoardJson).as("application/json")
   }
 
   def makeMove: Action[AnyContent] = Action {
@@ -45,8 +48,6 @@ class GameInteractionController @Inject()(override val controllerComponents: Con
       controller.domove()
       controller.move_c(old_pos, new_pos)
 
-      // val chessBoardAsJson = Json.stringify(Json.toJson(chessBoardAsVectorMap))
-      // val updatedBoardJson: JsValue = Json.obj("board" -> chessBoardAsJson)
       val updatedBoardJson = vectorMapToJson(controller.field)
       Ok(updatedBoardJson).as("application/json")
   }

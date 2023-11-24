@@ -1,6 +1,6 @@
 'use strict'
 
-let draggedPiece = null
+let draggedPiece = null // vermeide ReferenceError, wenn DOMContent noch nicht geladen hat
 
 // Schachfiguren und ihre Bildpfade
 const pieceMappings = {
@@ -86,32 +86,95 @@ function initializeChessPage() {
   })
 }
 
-// Beim Laden der Seite werden alle nötigen Funktionen ausgeführt
-document.addEventListener('DOMContentLoaded', initializeChessPage)
-
-// Sendet einen AJAX-Request an den Server, um einen Schachzug auszuführen
-function sendMoveToServer(oldPosition, newPosition) {
-  let url = '/chess/move' + '?old=' + oldPosition + '&new=' + newPosition
-
-  $.ajax({
-    type: 'POST',
-    url: url,
-    accept: 'application/json',
-    contentType: 'application/json',
-    success: function (response) {
-      updateChessBoard(response)
-      initializeChessPage() // Seite jedes Mal erneut initialisieren
-    },
-    error: function (jqXHR, textStatus, errorThrown) {
-      console.error('Fehler bei der Anfrage:', errorThrown)
-    },
-  })
-}
-
 // Funktion, die das Schachbrett nach einer AJAX-Anfrage aktualisiert
 function updateChessBoard(chessBoard) {
   const chessPieces = Object.entries(chessBoard.field.field_entry)
   chessPieces.forEach((entry) => {
     $('#' + entry[1].pos).text(entry[1].figure)
+  })
+}
+
+/* === EVENT LISTENER === */
+$(document).ready(function () {
+  initializeChessPage()
+})
+
+$('#navbar #newGame').click(function (event) {
+  event.preventDefault()
+  sendNewGameToServer()
+})
+
+$('#navbar #undoMove').click(function (event) {
+  event.preventDefault()
+  sendUndoMoveToServer()
+})
+
+$('#navbar #redoMove').click(function (event) {
+  event.preventDefault()
+  sendRedoMoveToServer()
+})
+
+/* === AJAX ANFRAGEN AN DEN PLAY SERVER === */
+function sendMoveToServer(oldPosition, newPosition) {
+  $.ajax({
+    type: 'POST',
+    url: '/chess/move' + '?old=' + oldPosition + '&new=' + newPosition,
+    accept: 'application/json',
+    contentType: 'application/json',
+    success: function (response) {
+      updateChessBoard(response)
+      initializeChessPage()
+    },
+    error: function (_jqXHR, _textStatus, errorThrown) {
+      console.error('Fehler bei der Anfrage:', errorThrown)
+    },
+  })
+}
+
+function sendNewGameToServer() {
+  $.ajax({
+    type: 'GET',
+    url: '/chess/new',
+    accept: 'application/json',
+    contentType: 'application/json',
+    success: function (response) {
+      updateChessBoard(response)
+      initializeChessPage()
+    },
+    error: function (_jqXHR, _textStatus, errorThrown) {
+      console.error('Fehler bei der Anfrage:', errorThrown)
+    },
+  })
+}
+
+function sendUndoMoveToServer() {
+  $.ajax({
+    type: 'GET',
+    url: '/chess/undo',
+    accept: 'application/json',
+    contentType: 'application/json',
+    success: function (response) {
+      updateChessBoard(response)
+      initializeChessPage()
+    },
+    error: function (_jqXHR, _textStatus, errorThrown) {
+      console.error('Fehler bei der Anfrage:', errorThrown)
+    },
+  })
+}
+
+function sendRedoMoveToServer() {
+  $.ajax({
+    type: 'GET',
+    url: '/chess/redo',
+    accept: 'application/json',
+    contentType: 'application/json',
+    success: function (response) {
+      updateChessBoard(response)
+      initializeChessPage()
+    },
+    error: function (_jqXHR, _textStatus, errorThrown) {
+      console.error('Fehler bei der Anfrage:', errorThrown)
+    },
   })
 }
