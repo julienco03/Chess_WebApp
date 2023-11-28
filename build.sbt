@@ -8,5 +8,4 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "6.0.0-RC2" % Test
-
-scalacOptions += "-Ytasty-reader"
+libraryDependencies += "com.typesafe.play" %% "play-json" % "2.10.0"

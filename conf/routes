@@ -12,6 +12,7 @@ GET     /chess                      controllers.GameInteractionController.chess(
 GET     /chess/new                  controllers.GameInteractionController.newGame()
 GET     /chess/undo                 controllers.GameInteractionController.undoMove()
 GET     /chess/redo                 controllers.GameInteractionController.redoMove()
++ nocsrf
 POST    /chess/move                 controllers.GameInteractionController.makeMove()
 
 # Favicon

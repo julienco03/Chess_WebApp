@@ -1,24 +1,25 @@
-@(playerNames: Array[String], playerTurn: String, chessBoardFields: Array[Array[String]])
+@(chessBoardFields: Array[Array[String]], x_labels: Array[String], y_labels: Array[String])
 
 @main("Play Chess") {
 <link rel="stylesheet" href="@routes.Assets.versioned("stylesheets/chess.css")">
 
+<!-- NAVIGATION -->
 <nav id="navbar" class="px-3 sticky-top navbar navbar-light bg-light navbar-expand-sm">
     <ul class="navbar-nav">
-        <li class="nav-item px-3">
-            <a class="nav-link" href="/chess/new">
+        <li id="newGame" class="nav-item px-3">
+            <a class="nav-link">
                 <img src="@routes.Assets.versioned("images/new.png")" alt="New Game Icon">
                 New Game
             </a>
         </li>
-        <li class="nav-item px-3">
-            <a class="nav-link" href="/chess/undo">
+        <li id="undoMove" class="nav-item px-3">
+            <a class="nav-link">
                 <img src="@routes.Assets.versioned("images/undo.png")" alt="Undo Icon" style="margin-bottom: 3px;">
                 Undo
             </a>
         </li>
-        <li class="nav-item px-3">
-            <a class="nav-link" href="/chess/redo">
+        <li id="redoMove" class="nav-item px-3">
+            <a class="nav-link">
                 <img src="@routes.Assets.versioned("images/redo.png")" alt="Redo Icon" style="margin-bottom: 3px;">
                 Redo
             </a>
@@ -26,49 +27,63 @@
     </ul>
 </nav>
 
-<div class="container-fluid mt-5 mb-2 text-center">
-
-    <div id="alert-box" class="alert alert-success mx-auto">
-        <p class="mb-0">@playerTurn ist an der Reihe...</p>
+<!-- POP-UP -->
+<div id="popup">
+    <label for="player1NameInput">Name von Spieler 1:</label>
+    <input type="text" id="player1NameInput"><br>
+    <label for="player2NameInput">Name von Spieler 2:</label>
+    <input type="text" id="player2NameInput">
+    <div class="d-grid">
+        <button id="closeBtn" class="btn btn-dark btn-block mt-2" type="button">Bestätigen</button>
     </div>
+</div>
+<div id="popup-overlay"></div>
 
-    <div>
-        <div id="xlabel">
-            <div>A</div>
-            <div>B</div>
-            <div>C</div>
-            <div>D</div>
-            <div>E</div>
-            <div>F</div>
-            <div>G</div>
-            <div>H</div>
+<main>
+    <div class="container-fluid mt-4 mb-2 text-center">
+        <!-- PLAYER 1 -->
+        <div class="playerProfile nextTurn mb-3 mx-auto bg-light">
+            <img src="@routes.Assets.versioned("images/avatar.jpg")" alt="Player 1 Avatar">
+            <span id="player1Name">Player1</span>
         </div>
 
-        <div id="chessboard-wrapper">
-            <div id="ylabel">
-                <div>1</div>
-                <div>2</div>
-                <div>3</div>
-                <div>4</div>
-                <div>5</div>
-                <div>6</div>
-                <div>7</div>
-                <div>8</div>
-            </div>
-            <div id="chessboard">
-                @for(line <- chessBoardFields) {
-                <div class="line">
-                    @for(square <- line) {
-                    <button class="square">@square</button>
-                    }
-                    <br>
-                </div>
+        <!-- CHESS BOARD -->
+        <div>
+            <div id="xlabel">
+                @for(label <- x_labels) {
+                <div>@label</div>
                 }
             </div>
+
+            <div id="chessboard-wrapper">
+                <div id="ylabel">
+                    @for(label <- y_labels) {
+                    <div>@label</div>
+                    }
+                </div>
+                <div id="chessboard">
+                    @for(line <- chessBoardFields) {
+                    <div class="line">
+                        @for(square <- line) {
+                        <button class="square chess-piece" style="font-size: 0;">@square</button>
+                        }
+                        <br>
+                    </div>
+                    }
+                </div>
+            </div>
         </div>
+
+        <!-- PLAYER 2 -->
+        <div class="playerProfile mt-3 mx-auto bg-light">            
+            <img src="@routes.Assets.versioned("images/avatar.jpg")" alt="Player 2 Avatar">
+            <span id="player2Name">Player 2</span>
+        </div>
+
     </div>
+</main>
 
-</div>
-
-<script rel="text/javascript" src="@routes.Assets.versioned("javascripts/chess.js")"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script rel="text/javascript" src="@routes.Assets.versioned("javascripts/chess_operations.js")" defer></script>
+<script rel="text/javascript" src="@routes.Assets.versioned("javascripts/chess_player_names.js")" defer></script>
 }
