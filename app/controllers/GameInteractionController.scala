@@ -45,8 +45,9 @@ class GameInteractionController @Inject()(override val controllerComponents: Con
       val old_pos = queryParams("old")
       val new_pos = queryParams("new")
 
-      controller.domove()
-      controller.move_c(old_pos, new_pos)
+      if (controller.last_turn() == controller.get_player_c(old_pos))
+        controller.domove()
+        controller.move_c(old_pos, new_pos)
 
       val updatedBoardJson = vectorMapToJson(controller.field)
       Ok(updatedBoardJson).as("application/json")
