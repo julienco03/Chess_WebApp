@@ -4,19 +4,22 @@
 # ~~~~
 
 # Basic routes
-GET     /                           controllers.BasicController.index()
-GET     /rules                      controllers.BasicController.rules()
+GET     /                           controllers.ChessController.index()
+GET     /rules                      controllers.ChessController.rules()
 
 # Game interaction routes
-GET     /chess                      controllers.GameInteractionController.chess()
-GET     /chess/new                  controllers.GameInteractionController.newGame()
-GET     /chess/undo                 controllers.GameInteractionController.undoMove()
-GET     /chess/redo                 controllers.GameInteractionController.redoMove()
+GET     /chess                      controllers.ChessController.chess()
+GET     /chess/new                  controllers.ChessController.newGame()
+GET     /chess/undo                 controllers.ChessController.undoMove()
+GET     /chess/redo                 controllers.ChessController.redoMove()
 + nocsrf
-POST    /chess/move                 controllers.GameInteractionController.makeMove()
+POST    /chess/move                 controllers.ChessController.makeMove()
 
 # Favicon
 GET     /favicon.ico                controllers.Assets.at(path="/public/images", file="favicon2.svg")
+
+# WebSocket
+GET     /websocket                 controllers.ChessController.socket
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
