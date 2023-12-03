@@ -14,7 +14,7 @@ $(document).ready(function () {
     overlay.hide();
   }
 
-  openPopup();
+  //openPopup();
 
   // Füge einen Event Listener für das Schließen des Popups hinzu
   $("#closeBtn").click(function () {

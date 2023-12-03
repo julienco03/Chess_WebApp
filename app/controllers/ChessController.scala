@@ -3,19 +3,32 @@ package controllers
 import de.htwg.se.Chess.controller.controllerComponent.Controller
 import de.htwg.se.Chess.model.Board
 import de.htwg.se.Chess.model.BoardInterface
-import play.api.mvc.*
+
+import akka.actor.ActorSystem
+import akka.stream.Materializer
+import akka.actor._
 import javax.inject.*
-import scala.collection.immutable.VectorMap
+import play.api.mvc.*
 import play.api.libs.json._
+import play.api.libs.streams.ActorFlow
+import scala.collection.immutable.VectorMap
+import scala.swing.Reactor
 
 @Singleton
-class GameInteractionController @Inject()(override val controllerComponents: ControllerComponents) extends AbstractController(controllerComponents) {
+class ChessController @Inject()(cc: ControllerComponents) (implicit system: ActorSystem, mat: Materializer) extends AbstractController(cc) {
 
   var controller: Controller = Controller(field = Board(), fileIO = null)
   val x_labels: Array[String] = Array("A", "B", "C", "D", "E", "F", "G", "H")
   val y_labels: Array[String] = Array("1", "2", "3", "4", "5", "6", "7", "8")
-  def chessBoardAsVectorMap: VectorMap[String, String] = controller.field.board
   def chessBoardFields: Array[Array[String]] = controller.field.board.values.grouped(8).toArray.map(row => row.toArray)
+
+  def index: Action[AnyContent] = Action {
+    Ok(views.html.index())
+  }
+
+  def rules: Action[AnyContent] = Action {
+    Ok(views.html.rules())
+  }
 
   def chess: Action[AnyContent] = Action {
     Ok(views.html.chess(chessBoardFields, x_labels, y_labels))
@@ -68,4 +81,36 @@ class GameInteractionController @Inject()(override val controllerComponents: Con
       )
     )
     Json.stringify(jsonData)
+
+  def socket: WebSocket = WebSocket.accept[String, String] { request =>
+    ActorFlow.actorRef { out =>
+      println("Connect received")
+      ChessWebSocketActorFactory.create(out)
+    }
+  }
+
+  object ChessWebSocketActorFactory {
+    def create(out: ActorRef): Props = {
+      Props(new ChessWebSocketActor(out))
+    }
+  }
+
+  class ChessWebSocketActor(out: ActorRef) extends Actor with Reactor {
+    //listenTo(controller)
+
+    def receive: Receive = {
+      case msg: String =>
+        out ! vectorMapToJson(controller.field)
+        println("Sent Json to Client" + msg)
+    }
+
+    reactions += {
+      case _ => sendJsonToClient()
+    }
+
+    def sendJsonToClient(): Unit = {
+      println("Received event from Controller")
+      out ! vectorMapToJson(controller.field)
+    }
+  }
 }
