@@ -7,8 +7,8 @@ import de.htwg.se.Chess.model.BoardInterface
 import akka.actor.ActorSystem
 import akka.stream.Materializer
 import akka.actor._
-import javax.inject.*
-import play.api.mvc.*
+import javax.inject._
+import play.api.mvc._
 import play.api.libs.json._
 import play.api.libs.streams.ActorFlow
 import scala.collection.immutable.VectorMap
@@ -19,7 +19,7 @@ class ChessController @Inject()(cc: ControllerComponents) (implicit system: Acto
 
   var controller: Controller = Controller(field = Board(), fileIO = null)
   val x_labels: Array[String] = Array("A", "B", "C", "D", "E", "F", "G", "H")
-  val y_labels: Array[String] = Array("1", "2", "3", "4", "5", "6", "7", "8")
+  val y_labels: Array[String] = Array("8", "7", "6", "5", "4", "3", "2", "1")
   def chessBoardFields: Array[Array[String]] = controller.field.board.values.grouped(8).toArray.map(row => row.toArray)
 
   def index: Action[AnyContent] = Action {
