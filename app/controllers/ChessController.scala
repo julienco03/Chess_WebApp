@@ -1,5 +1,6 @@
 package controllers
 
+import de.htwg.se.Chess.controller.CellChanged
 import de.htwg.se.Chess.controller.controllerComponent.Controller
 import de.htwg.se.Chess.model.Board
 import de.htwg.se.Chess.model.BoardInterface
@@ -12,6 +13,7 @@ import play.api.mvc._
 import play.api.libs.json._
 import play.api.libs.streams.ActorFlow
 import scala.collection.immutable.VectorMap
+import scala.swing.event.Event
 import scala.swing.Reactor
 
 @Singleton
@@ -96,7 +98,7 @@ class ChessController @Inject()(cc: ControllerComponents) (implicit system: Acto
   }
 
   class ChessWebSocketActor(out: ActorRef) extends Actor with Reactor {
-    //listenTo(controller)
+    listenTo(controller)
 
     def receive: Receive = {
       case msg: String =>
@@ -105,7 +107,7 @@ class ChessController @Inject()(cc: ControllerComponents) (implicit system: Acto
     }
 
     reactions += {
-      case _ => sendJsonToClient()
+      case event: CellChanged => sendJsonToClient()
     }
 
     def sendJsonToClient(): Unit = {

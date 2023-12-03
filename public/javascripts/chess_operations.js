@@ -212,8 +212,9 @@ function connectWebSocket() {
     websocket.onmessage = function (e) {
         if (typeof e.data === "string") {
             let json = JSON.parse(e.data);
-            console.log(json)
             updateChessBoard(json);
+            changePlayer();
+            initializeChessPage();
         }
     };
 }
