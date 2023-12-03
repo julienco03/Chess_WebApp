@@ -8,4 +8,5 @@ lazy val root = (project in file(".")).enablePlugins(PlayScala)
 
 libraryDependencies += guice
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "6.0.0-RC2" % Test
+libraryDependencies += "org.scala-lang.modules" %% "scala-swing" % "3.0.0"
 libraryDependencies += "com.typesafe.play" %% "play-json" % "2.10.0"

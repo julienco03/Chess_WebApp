@@ -105,6 +105,7 @@ function changePlayer() {
 /* === EVENT LISTENER === */
 $(document).ready(function () {
   initializeChessPage();
+  connectWebSocket();
 });
 
 $("#navbar #newGame").click(function (event) {
@@ -189,4 +190,31 @@ function sendRedoMoveToServer() {
       console.error("Fehler bei der Anfrage:", errorThrown);
     },
   });
+}
+
+/* === WEBSOCKET === */
+function connectWebSocket() {
+    const websocket = new WebSocket("ws://localhost:9000/websocket");
+    websocket.setTimeout;
+
+    websocket.onopen = function(event) {
+        console.log("Connected to Websocket");
+    };
+
+    websocket.onclose = function () {
+        console.log('Connection with Websocket Closed!');
+    };
+
+    websocket.onerror = function (error) {
+        console.log('Error in Websocket Occured: ' + error);
+    };
+
+    websocket.onmessage = function (e) {
+        if (typeof e.data === "string") {
+            let json = JSON.parse(e.data);
+            updateChessBoard(json);
+            changePlayer();
+            initializeChessPage();
+        }
+    };
 }
