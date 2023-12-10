@@ -20,8 +20,6 @@ import scala.swing.Reactor
 class ChessController @Inject()(cc: ControllerComponents) (implicit system: ActorSystem, mat: Materializer) extends AbstractController(cc) {
 
   var controller: Controller = Controller(field = Board(), fileIO = null)
-  val x_labels: Array[String] = Array("A", "B", "C", "D", "E", "F", "G", "H")
-  val y_labels: Array[String] = Array("8", "7", "6", "5", "4", "3", "2", "1")
   def chessBoardFields: Array[Array[String]] = controller.field.board.values.grouped(8).toArray.map(row => row.toArray)
 
   def index: Action[AnyContent] = Action {
@@ -33,7 +31,7 @@ class ChessController @Inject()(cc: ControllerComponents) (implicit system: Acto
   }
 
   def chess: Action[AnyContent] = Action {
-    Ok(views.html.chess(chessBoardFields, x_labels, y_labels))
+    Ok(views.html.chess())
   }
 
   def newGame: Action[AnyContent] = Action {

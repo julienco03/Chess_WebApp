@@ -55,7 +55,6 @@ function setButtonIDs() {
 
 // Funktion zum Initialisieren der Seite
 function initializeChessPage() {
-  replaceButtonTextWithImages();
   setButtonIDs();
 
   // Drag-and-drop Funktionalität
@@ -76,7 +75,9 @@ function initializeChessPage() {
 
     if (draggedPiece) {
       const oldPosition = draggedPiece.id;
-      const newPosition = event.target.id;
+      const newPosition = event.target.tagName === 'IMG'  // befindet sich eine Figur (<img>) auf dem Feld (<button>)?
+                            ? event.target.parentElement.id
+                            : event.target.id;
 
       if (oldPosition !== "" && newPosition !== "") {
         sendMoveToServer(oldPosition, newPosition);
@@ -92,14 +93,21 @@ function updateChessBoard(chessBoard) {
   chessPieces.forEach((entry) => {
     $("#" + entry[1].pos).text(entry[1].figure);
   });
+  replaceButtonTextWithImages();
 }
 
 // Funktion, welche die Spieler visuell abwechseln lässt
-function changePlayer() {
-  const playerProfiles = document.querySelectorAll(".playerProfile");
-  playerProfiles.forEach((playerProfile) => {
-    playerProfile.classList.toggle("nextTurn");
-  });
+function changePlayer(new_game) {
+  // Bei einem neuen Spiel beginnt immer Spieler1
+  if (new_game) {
+    document.querySelector("#player1Profile").classList.add("nextTurn");
+    document.querySelector("#player2Profile").classList.remove("nextTurn");
+  } else {
+      const playerProfiles = document.querySelectorAll(".playerProfile");
+        playerProfiles.forEach((playerProfile) => {
+        playerProfile.classList.toggle("nextTurn");
+      });
+  }
 }
 
 /* === EVENT LISTENER === */
@@ -132,7 +140,7 @@ function sendMoveToServer(oldPosition, newPosition) {
     contentType: "application/json",
     success: function (response) {
       updateChessBoard(response);
-      changePlayer();
+      changePlayer(false);
       initializeChessPage();
     },
     error: function (_jqXHR, _textStatus, errorThrown) {
@@ -149,7 +157,7 @@ function sendNewGameToServer() {
     contentType: "application/json",
     success: function (response) {
       updateChessBoard(response);
-      changePlayer();
+      changePlayer(true);
       initializeChessPage();
     },
     error: function (_jqXHR, _textStatus, errorThrown) {
@@ -166,7 +174,7 @@ function sendUndoMoveToServer() {
     contentType: "application/json",
     success: function (response) {
       updateChessBoard(response);
-      changePlayer();
+      changePlayer(false);
       initializeChessPage();
     },
     error: function (_jqXHR, _textStatus, errorThrown) {
@@ -183,7 +191,7 @@ function sendRedoMoveToServer() {
     contentType: "application/json",
     success: function (response) {
       updateChessBoard(response);
-      changePlayer();
+      changePlayer(false);
       initializeChessPage();
     },
     error: function (_jqXHR, _textStatus, errorThrown) {
@@ -213,7 +221,7 @@ function connectWebSocket() {
         if (typeof e.data === "string") {
             let json = JSON.parse(e.data);
             updateChessBoard(json);
-            changePlayer();
+            changePlayer(false);
             initializeChessPage();
         }
     };

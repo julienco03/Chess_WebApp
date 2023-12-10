@@ -14,7 +14,7 @@ $(document).ready(function () {
     overlay.hide();
   }
 
-  //openPopup();
+  openPopup();
 
   // Füge einen Event Listener für das Schließen des Popups hinzu
   $("#closeBtn").click(function () {
@@ -23,8 +23,8 @@ $(document).ready(function () {
 
     if (isValidPlayerName(player1Name) && isValidPlayerName(player2Name)) {
       // Spielernamen anhand der Eingaben setzen
-      $("#player1Name").text(player1Name);
-      $("#player2Name").text(player2Name);
+      $("#player1Profile span").text(player1Name);
+      $("#player2Profile span").text(player2Name);
       closePopup();
     } else {
       alert("Please provide valid player names!");
