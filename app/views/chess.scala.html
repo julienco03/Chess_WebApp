@@ -40,50 +40,18 @@
 <div id="popup-overlay"></div>
 
 <main>
-    <div class="container-fluid mt-4 mb-2 text-center">
-        <!-- PLAYER 1 -->
-        <div class="playerProfile nextTurn mb-3 mx-auto bg-light">
-            <img src="@routes.Assets.versioned("images/avatar.jpg")" alt="Player 1 Avatar">
-            <span id="player1Name">Player1</span>
-        </div>
+    <div class="container-fluid text-center mt-5">
 
-        <!-- CHESS BOARD -->
-        <div>
-            <div id="xlabel">
-                @for(label <- x_labels) {
-                <div>@label</div>
-                }
-            </div>
-
-            <div id="chessboard-wrapper">
-                <div id="ylabel">
-                    @for(label <- y_labels) {
-                    <div>@label</div>
-                    }
-                </div>
-                <div id="chessboard">
-                    @for(line <- chessBoardFields) {
-                    <div class="line">
-                        @for(square <- line) {
-                        <button class="square chess-piece" style="font-size: 0;">@square</button>
-                        }
-                        <br>
-                    </div>
-                    }
-                </div>
-            </div>
-        </div>
-
-        <!-- PLAYER 2 -->
-        <div class="playerProfile mt-3 mx-auto bg-light">            
-            <img src="@routes.Assets.versioned("images/avatar.jpg")" alt="Player 2 Avatar">
-            <span id="player2Name">Player 2</span>
+        <div id="app">
+            <player-profile id="player1Profile" class="nextTurn"></player-profile>
+            <chessboard></chessboard>
+            <player-profile id="player2Profile"></player-profile>
         </div>
 
     </div>
 </main>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script rel="text/javascript" src="@routes.Assets.versioned("javascripts/chess_vue.js")"></script>
 <script rel="text/javascript" src="@routes.Assets.versioned("javascripts/chess_operations.js")" defer></script>
 <script rel="text/javascript" src="@routes.Assets.versioned("javascripts/chess_player_names.js")" defer></script>
 }
