@@ -1,11 +1,15 @@
 <template>
   <div class="playerProfile mt-4 mb-3 mx-auto bg-light">
-    <img src="/assets/images/avatar.jpg" alt="Player Avatar" />
+    <img src="@/assets/images/avatar.jpg" alt="Player Avatar" />
     <span class="ps-2">Player</span>
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+  name: "PlayerProfile",
+};
+</script>
 
 <style scoped>
 .playerProfile {

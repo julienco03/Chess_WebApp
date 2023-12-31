@@ -1,8 +1,21 @@
 <template>
-  <div>Popup</div>
+  <div id="popup">
+    <label for="player1NameInput">Name von Spieler 1:</label>
+    <input type="text" id="player1NameInput" /><br />
+    <label for="player2NameInput">Name von Spieler 2:</label>
+    <input type="text" id="player2NameInput" />
+    <div class="d-grid">
+      <button id="closeBtn" class="btn btn-dark btn-block mt-2" type="button">
+        Bestätigen
+      </button>
+    </div>
+  </div>
+  <div id="popup-overlay"></div>
 </template>
 
 <script>
+import $ from "jquery";
+
 $(document).ready(function () {
   const popup = $("#popup");
   const overlay = $("#popup-overlay");
@@ -47,6 +60,10 @@ $(document).ready(function () {
     );
   }
 });
+
+export default {
+  name: "PlayerNamesPopup",
+};
 </script>
 
 <style scoped>

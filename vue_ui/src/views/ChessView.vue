@@ -1,56 +1,31 @@
 <template>
-  <header>
-    <!-- NAVIGATION -->
-    <nav
-      id="navbar"
-      class="px-3 sticky-top navbar navbar-light bg-light navbar-expand-sm"
-    >
-      <ul class="navbar-nav">
-        <li id="newGame" class="nav-item px-3">
-          <a class="nav-link">
-            <img src="@/assets/images/new.png" alt="New Game Icon" />
-            New Game
-          </a>
-        </li>
-        <li id="undoMove" class="nav-item px-3">
-          <a class="nav-link">
-            <img
-              src="@/assets/images/undo.png"
-              alt="Undo Icon"
-              style="margin-bottom: 3px"
-            />
-            Undo
-          </a>
-        </li>
-        <li id="redoMove" class="nav-item px-3">
-          <a class="nav-link">
-            <img
-              src="@/assets/images/redo.png"
-              alt="Redo Icon"
-              style="margin-bottom: 3px"
-            />
-            Redo
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </header>
+  <navbar />
+
+  <playernamespopup />
 
   <main>
-    <!--<popup />-->
     <div class="container-fluid text-center mt-5">
-      <div id="app">
-        <!--<player-profile id="player1Profile" class="nextTurn"></player-profile>-->
-        <ChessBoard />
-        <!--<player-profile id="player2Profile"></player-profile>-->
-      </div>
+      <playerprofile id="player1Profile" class="nextTurn"></playerprofile>
+      <chessboard />
+      <playerprofile id="player2Profile"></playerprofile>
     </div>
   </main>
 </template>
 
 <script>
+import ChessNavbar from "@/components/ChessNavbar.vue";
+import ChessBoard from "@/components/ChessBoard.vue";
+import PlayerProfile from "@/components/PlayerProfile.vue";
+import PlayerNamesPopup from "@/components/PlayerNamesPopUp.vue";
+
 export default {
   name: "ChessView",
+  components: {
+    navbar: ChessNavbar,
+    chessboard: ChessBoard,
+    playerprofile: PlayerProfile,
+    playernamespopup: PlayerNamesPopup,
+  },
 };
 </script>
 

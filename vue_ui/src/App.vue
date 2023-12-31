@@ -1,7 +1,5 @@
 <template>
-  <div id="app">
-    <router-view />
-  </div>
+  <router-view />
 </template>
 
 <script>
@@ -11,6 +9,7 @@ export default {
 </script>
 
 <style>
+/* General styling */
 :root {
   --body-background-color: #fff2d8;
   --light-square-color: #ffffff;
@@ -24,7 +23,6 @@ export default {
   --horizontal-offset-mobile: 10px;
 }
 
-/* General styling */
 *,
 *::before,
 *::after {
@@ -42,18 +40,6 @@ body {
 
 button {
   border: none;
-  cursor: pointer;
-}
-
-/* Navigation */
-#navbar {
-  width: fit-content;
-  display: block;
-  margin: 0 auto;
-  z-index: 997;
-}
-
-#navbar li.nav-item {
   cursor: pointer;
 }
 </style>
