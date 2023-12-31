@@ -1,36 +1,26 @@
-import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
-import ChessView from '../views/ChessView.vue'
-import RulesView from '../views/RulesView.vue'
+import { createRouter, createWebHistory } from "vue-router";
+import HomeView from "@/views/HomeView.vue";
+import ChessView from "@/views/ChessView.vue";
+import RulesView from "@/views/RulesView.vue";
+
+const routes = [
+  {
+    path: "/",
+    component: HomeView,
+  },
+  {
+    path: "/rules",
+    component: RulesView,
+  },
+  {
+    path: "/chess",
+    component: ChessView,
+  },
+];
 
 const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  routes: [
-    {
-      component: HomeView,
-      meta: {
-        title: 'Home'
-      },
-      name: 'home',
-      path: '/'
-    },
-    {
-      component: ChessView,
-      meta: {
-        title: 'Chess'
-      },
-      name: 'chess',
-      path: '/chess'
-    },
-    {
-      component: RulesView,
-      meta: {
-        title: 'Rules'
-      },
-      name: 'rules',
-      path: '/rules'
-    }
-  ]
-})
+  history: createWebHistory(),
+  routes,
+});
 
-export default router
+export default router;
