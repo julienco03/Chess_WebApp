@@ -41,6 +41,13 @@
 </template>
 
 <script>
+import { initializeChessPage, connectWebSocket } from "../chess_helper_functions";
+
+document.addEventListener("DOMContentLoaded", function () {
+  initializeChessPage();
+  connectWebSocket();
+});
+
 export default {
   data() {
     return {
@@ -95,8 +102,7 @@ export default {
         this.pieces[pieceType] &&
         this.pieces[pieceType][pieceColor]
       ) {
-        return require("@/assets/images/chess_pieces/" +
-          this.pieces[pieceType][pieceColor]);
+        return "/chess_pieces/" + this.pieces[pieceType][pieceColor];
       }
       return "";
     },

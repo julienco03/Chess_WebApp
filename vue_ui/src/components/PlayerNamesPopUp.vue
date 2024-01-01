@@ -1,8 +1,8 @@
 <template>
   <div id="popup">
-    <label for="player1NameInput">Name von Spieler 1:</label>
+    <label for="player1NameInput">Name von Spieler 1:&nbsp;</label>
     <input type="text" id="player1NameInput" /><br />
-    <label for="player2NameInput">Name von Spieler 2:</label>
+    <label for="player2NameInput">Name von Spieler 2:&nbsp;</label>
     <input type="text" id="player2NameInput" />
     <div class="d-grid">
       <button id="closeBtn" class="btn btn-dark btn-block mt-2" type="button">
