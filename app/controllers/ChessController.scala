@@ -22,18 +22,6 @@ class ChessController @Inject()(cc: ControllerComponents) (implicit system: Acto
   var controller: Controller = Controller(field = Board(), fileIO = null)
   def chessBoardFields: Array[Array[String]] = controller.field.board.values.grouped(8).toArray.map(row => row.toArray)
 
-  def index: Action[AnyContent] = Action {
-    Ok(views.html.index())
-  }
-
-  def rules: Action[AnyContent] = Action {
-    Ok(views.html.rules())
-  }
-
-  def chess: Action[AnyContent] = Action {
-    Ok(views.html.chess())
-  }
-
   def newGame: Action[AnyContent] = Action {
     controller = Controller(field = Board(), fileIO = null)
     val updatedBoardJson = vectorMapToJson(controller.field)

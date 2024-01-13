@@ -3,20 +3,13 @@
 # https://www.playframework.com/documentation/latest/ScalaRouting
 # ~~~~
 
-# Basic routes
-GET     /                           controllers.ChessController.index()
-GET     /rules                      controllers.ChessController.rules()
 
 # Game interaction routes
-GET     /chess                      controllers.ChessController.chess()
 GET     /chess/new                  controllers.ChessController.newGame()
 GET     /chess/undo                 controllers.ChessController.undoMove()
 GET     /chess/redo                 controllers.ChessController.redoMove()
 + nocsrf
 POST    /chess/move                 controllers.ChessController.makeMove()
-
-# Favicon
-GET     /favicon.ico                controllers.Assets.at(path="/public/images", file="favicon2.svg")
 
 # WebSocket
 GET     /websocket                 controllers.ChessController.socket

@@ -1,4 +1,20 @@
-"use strict";
+<template>
+  <div id="popup">
+    <label for="player1NameInput">Name von Spieler 1:&nbsp;</label>
+    <input type="text" id="player1NameInput" /><br />
+    <label for="player2NameInput">Name von Spieler 2:&nbsp;</label>
+    <input type="text" id="player2NameInput" />
+    <div class="d-grid">
+      <button id="closeBtn" class="btn btn-dark btn-block mt-2" type="button">
+        Bestätigen
+      </button>
+    </div>
+  </div>
+  <div id="popup-overlay"></div>
+</template>
+
+<script>
+import $ from "jquery";
 
 $(document).ready(function () {
   const popup = $("#popup");
@@ -44,3 +60,39 @@ $(document).ready(function () {
     );
   }
 });
+
+export default {
+  name: "PlayerNamesPopup",
+};
+</script>
+
+<style scoped>
+#popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 20px;
+  border: 2px solid #ccc;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  z-index: 999;
+}
+
+#popup > input {
+  margin-bottom: 10px;
+  border: 1px solid #000;
+}
+
+#popup-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 998;
+}
+</style>
