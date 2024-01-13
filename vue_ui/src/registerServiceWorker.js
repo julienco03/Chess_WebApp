@@ -1,8 +1,11 @@
 /* eslint-disable no-console */
 
 import { register } from "register-service-worker";
+import { createApp } from "vue";
+import App from "./App.vue";
+import router from "./router/router.js";
 
-//if (process.env.NODE_ENV === 'production') {
+//if (process.env.NODE_ENV === "production") {
 register(`${process.env.BASE_URL}service-worker.js`, {
   ready() {
     console.log(
@@ -24,9 +27,17 @@ register(`${process.env.BASE_URL}service-worker.js`, {
   },
   offline() {
     console.log("No internet connection found. App is running in offline mode.");
+    const app = createApp(App);
+    app.use(router);
+    app.mount("#app");
+    router.push({ name: "OfflinePage" });
   },
   error(error) {
     console.error("Error during service worker registration:", error);
+    const app = createApp(App);
+    app.use(router);
+    app.mount("#app");
+    router.push({ name: "OfflinePage" });
   },
 });
 //}

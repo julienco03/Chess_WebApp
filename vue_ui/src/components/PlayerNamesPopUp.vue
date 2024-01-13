@@ -20,17 +20,17 @@ $(document).ready(function () {
   const popup = $("#popup");
   const overlay = $("#popup-overlay");
 
-  function openPopup() {
-    popup.show();
-    overlay.show();
-  }
+  // function openPopup() {
+  //   popup.show();
+  //   overlay.show();
+  // }
 
   function closePopup() {
     popup.hide();
     overlay.hide();
   }
 
-  openPopup();
+  //openPopup();
 
   // Füge einen Event Listener für das Schließen des Popups hinzu
   $("#closeBtn").click(function () {
