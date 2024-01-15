@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "@/views/HomeView.vue";
 import ChessView from "@/views/ChessView.vue";
 import RulesView from "@/views/RulesView.vue";
+import OfflineView from "@/views/OfflineView.vue";
 
 const routes = [
   {
@@ -15,6 +16,10 @@ const routes = [
   {
     path: "/chess",
     component: ChessView,
+  },
+  {
+    path: "/offline",
+    component: () => OfflineView,
   },
 ];
 

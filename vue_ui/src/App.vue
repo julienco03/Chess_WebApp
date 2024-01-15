@@ -34,8 +34,8 @@ html {
 }
 
 body {
-  font-family: "Lato", "Helvetica", "sans-serif";
-  background-color: var(--body-background-color);
+  font-family: "Lato", "Helvetica", "sans-serif" !important;
+  background-color: var(--body-background-color) !important;
 }
 
 button {
